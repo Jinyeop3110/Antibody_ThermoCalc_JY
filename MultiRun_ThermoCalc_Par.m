@@ -2,16 +2,16 @@
 clc; clear;
 %% Setting System Param
 kD1=20*10^-9; % antibody - target
-kD2_list=1.1040*10^(-4)*[0, exp(log(10)*linspace(-3.0,3.0,63)/5)] % 20*10^-6 * [0, exp(log(10)*linspace(-1,2,31))]; % weak-binding
+kD2_list=2.51040*10^(-4)*[0, exp(log(10)*linspace(-3.0,3.0,63)/5)] % 20*10^-6 * [0, exp(log(10)*linspace(-1,2,31))]; % weak-binding
 N_avogadro=6.02*10^23;
 V_eff=4/3*pi*(100*10^-10)^3*1000;
 kD2_eff_list=kD2_list*N_avogadro*V_eff;
 pA=10^-9;
-type="cubicSphere2D"; % "linear1D", "circle1D", "square2D", "traingularSphere2D" ,"cubicSphere2D"
+type="triangularSphere2D"; % "linear1D", "circle1D", "square2D", "traingularSphere2D" ,"cubicSphere2D"
 Tnum=98;
 %% Setting Exp param
 TestTime=50*2^10;
-Project_title = "0706_cubicSphere2D_Tnum98_compactKd2";
+Project_title = "0706_triangularSphere2D_Tnum98_compactKd2";
 ProbS=zeros(size(kD2_list,2),TestTime);
 
 %% Initiate AT system

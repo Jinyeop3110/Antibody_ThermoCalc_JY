@@ -41,6 +41,10 @@ xlabel("log(Kd2)")
 ylabel("bounding %")
 
 legend([data1name data2name data3name data4name data5name "Control"])
+a=string(datetime);
+saveas(gcf,"Figure/"+a+".fig")
+saveas(gcf,"Figure/"+a+".png")
+
 
 %%
 %%
@@ -80,3 +84,7 @@ xlabel("log(Kd2)")
 ylabel("log(Kd_eff)")
 
 legend([data1name data2name data3name data4name data5name "Control"])
+a=string(datetime);
+saveas(gcf,"Figure/"+a+".fig")
+saveas(gcf,"Figure/"+a+".png")
+

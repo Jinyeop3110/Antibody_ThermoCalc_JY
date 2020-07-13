@@ -66,7 +66,7 @@ if(type=="square2D")
     sys.Tnum=Num*Num;
     sys.T=(rand(1,sys.Tnum)>p);
     sys.T_position=struct;
-    [X,Y]=meshgrid(linspace(1,1*Num,Num),linspace(1,1*Num,Num))
+    [X,Y]=meshgrid(linspace(1,1*Num,Num),linspace(1,1*Num,Num));
     sys.T_position.x=X(:);
     sys.T_position.y=Y(:);
     sys.T_position.z=zeros(1,sys.Tnum);
