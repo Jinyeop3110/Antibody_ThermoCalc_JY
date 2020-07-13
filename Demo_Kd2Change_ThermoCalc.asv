@@ -61,7 +61,7 @@ disp("MCMC done")
 cmap=hsv(10);
 
 figure()
-dataname=type+" Tnum:"+int2str(Tnum)
+dataname=type+"_Tnum_"+int2str(Tnum)
 semilogx(Kd2_list(2:size(Kd2_list,2)),mean(ProbS(2:size(Kd2_list,2),:),2)/sys_model.Tnum,'-o','Color',cmap(2,:),'MarkerEdgeColor',cmap(2,:))
 hold on
 semilogx([0.5*min(Kd2_list(2:size(Kd2_list,2))),2*max(Kd2_list(2:size(Kd2_list,2)))],[pA/Kd1, pA/Kd1],'Color','blue','LineStyle','--')
@@ -77,7 +77,7 @@ if IsSave
 end
 
 figure()
-dataname=type+" Tnum :"+int2str(Tnum)
+dataname=type+"_Tnum_"+int2str(Tnum)
 loglog(Kd2_list(2:size(Kd2_list,2)),pA*(1-mean(ProbS(2:size(Kd2_list,2),:),2)/sys_model.Tnum)./(mean(ProbS(2:size(Kd2_list,2),:),2)/sys_model.Tnum),'-o','Color',cmap(2,:),'MarkerEdgeColor',cmap(2,:))
 hold on
 semilogx([0.5*min(Kd2_list(2:size(Kd2_list,2))),2*max(Kd2_list(2:size(Kd2_list,2)))],[Kd1, Kd1],'Color','blue','LineStyle','--')

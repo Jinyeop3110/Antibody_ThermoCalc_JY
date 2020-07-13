@@ -9,7 +9,7 @@ V_eff=4/3*pi*(R_eff*10^-10)^3*1000;
 kD2_eff_list=kD2_list*N_avogadro*V_eff;
 pA=10^-9;
 type="square2D"; % "linear1D", "circle1D", "square2D", "traingularSphere2D" ,"cubicSphere2D"
-Tnum_list=[100 256 1000];
+Tnum_list=[900];
 %% Setting Exp param
 
 for j=1:size(Tnum_list,2)
@@ -25,7 +25,7 @@ for j=1:size(Tnum_list,2)
     end
     
     parfor i=1:size(kD2_list,2)
-        ProbS(i,:)=par_Metropolis_withW(Project_title,type,Tnum,kD1,kD2_list(i),kD2_eff_list(i),pA,TestTime, 50)
+        ProbS(i,:)=par_Metropolis_withW(Project_title,type,Tnum,kD1,kD2_list(i),kD2_eff_list(i),pA,TestTime, 200)
     end
     
     sys_model=Init_AT_System(type,Tnum);
