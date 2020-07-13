@@ -1,7 +1,7 @@
 # 2020_Antibody_ThermoCalc_JY_v0.0 (20/07/13)
  
 ## Description
-This code is for calculating thermodynamic property of antibody system under precense of weak-bidning linkers. For the thermodynamic approach, Markov Chain Monte Carlo simulations are used. 
+This code is for calculating thermodynamic property of antibody system under precense of weak-bidning linkers. For the thermodynamic approach, Markov Chain Monte Carlo simulations are used. The project is supervised under Prof.Won-Ki Cho & Prof.Byung-Ha Oh
 
 ## Requirement
 MATALB(>2019)
