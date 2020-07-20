@@ -80,7 +80,7 @@ end
 %% randomQuasiFlat2D
 if(type=="randomQuasiFlat2D")
     p=0.5;
-    sys.type="randomUniformFlat2D";
+    sys.type="randomQuasiFlat2D";
     sys.Tnum=floor((L)*density);
     sys.T=(rand(1,sys.Tnum)>p);
     sys.T_position=struct;
@@ -112,10 +112,10 @@ if(type=="randomQuasiFlat2D")
     sys.W=zeros(1,size(sys.W_relation,1));
 end
 
-%% randomUniformSphere2D
-if(type=="randomUniformSphere2D")
+%% randomQuasiSphere2D
+if(type=="randomQuasiSphere2D")
     p=0.5;
-    sys.type="randomUniformSphere2D";
+    sys.type="randomQuasiSphere2D";
     sys.Tnum=floor((L)*density);
     sys.T=(rand(1,sys.Tnum)>p);
     sys.T_position=struct;
