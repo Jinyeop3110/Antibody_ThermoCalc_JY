@@ -1,4 +1,4 @@
-function sys = Init_RandomSurface_AT_System(type, density, L)
+function sys = Init_RandomSurface_AT_System(type, L, density)
 
 % RandomSurface AT system initiation , Jul-20-2020
 
