@@ -1,4 +1,4 @@
-# 2020_Antibody_ThermoCalc_JY_v0.0 (2020 / 07 / 13)
+# 2020_Antibody_ThermoCalc_JY (last updated : 2020 / 07 / 20)
  
 ## Description
 This code calculates thermodynamic properties of antigen-antibody system with weak-bidning linkers. Markov Chain Monte Carlo(MCMC) method is used for the thermodynamic simulation. The project is under supervision of Prof.Won-Ki Cho & Prof.Byung-Ha Oh
