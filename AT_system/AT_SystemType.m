@@ -5,5 +5,9 @@ classdef AT_SystemType
         square2D
         triangularSphere2D
         cubicSphere2D
+        randomUniformFlat2D
+        randomUniformSphere2D
+        randomQuasiFlat2D
+        randomQuasiSphere2D
     end
 end
