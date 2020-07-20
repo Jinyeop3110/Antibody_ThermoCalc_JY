@@ -2,13 +2,14 @@
 %% Nchange
 clc; clear;
 cmap=hsv(10);
-Tnum_list=[4 9 16 25 49 64 100 256];
+Tnum_list=[4 9 16 25 49 64 100 256 ]%900];
+issave=1;
 %% 
+figure()
 lgd=[];
 j=0;
 
-for j=1:7
-    j=j+1;
+for j=1:size(Tnum_list,2)
 Tnum=Tnum_list(j);
 datapath = "Data\0711_square2D_Tnum"+int2str(Tnum)+"_Nchange.mat";
 dataname="Tnum="+int2str(Tnum);
@@ -28,9 +29,10 @@ lgd=[lgd "Control"];
 
 legend(lgd)
 a=[sprintf('%s', datestr(now,'mm-dd-yyyy HH-MM_')) int2str(randi(500))];
+if issave
 saveas(gcf,"Figure\fig_"+a+".fig")
 saveas(gcf,"Figure\fig_"+a+".png")
-
+end
 
 %%
 %%
@@ -39,8 +41,7 @@ figure()
 lgd=[];
 j=0;
 
-for j=1:7
-    j=j+1;
+for j=1:size(Tnum_list,2)
 Tnum=Tnum_list(j);
 datapath = "Data\0711_square2D_Tnum"+int2str(Tnum)+"_Nchange.mat";
 dataname="Tnum="+int2str(Tnum);
@@ -61,5 +62,7 @@ legend(lgd)
 
 legend(lgd)
 a=[sprintf('%s', datestr(now,'mm-dd-yyyy HH-MM_')) int2str(randi(500))];
+if issave
 saveas(gcf,"Figure\fig_"+a+".fig")
 saveas(gcf,"Figure\fig_"+a+".png")
+end

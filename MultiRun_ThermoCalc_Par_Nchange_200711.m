@@ -2,10 +2,10 @@
 clc; clear;
 %% Setting System Param
 kD1=20*10^-9; % antibody - target
-kD2_list= 20*10^-6 * [0, exp(log(10)*linspace(-1,2,63))]; % weak-binding
+kD2_list= 160*10^-6 * [0, exp(log(10)*linspace(-1,2,63))]; % weak-binding
 N_avogadro=6.02*10^23;
-R_eff=100; % Aongstrom
-V_eff=4/3*pi*(R_eff*10^-10)^3*1000;
+R_eff=5; % Aongstrom
+V_eff=4/3*pi*(R_eff*10^-9)^3*1000;
 kD2_eff_list=kD2_list*N_avogadro*V_eff;
 pA=10^-9;
 type="square2D"; % "linear1D", "circle1D", "square2D", "traingularSphere2D" ,"cubicSphere2D"
@@ -13,7 +13,7 @@ Tnum_list=[900];
 %% Setting Exp param
 
 for j=1:size(Tnum_list,2)
-    TestTime=10*2^10;
+    TestTime=50*2^10;
     Tnum=Tnum_list(j);
     Project_title = "0711_square2D_Tnum"+int2str(Tnum)+"_Nchange";
     ProbS=zeros(size(kD2_list,2),TestTime);
@@ -29,7 +29,7 @@ for j=1:size(Tnum_list,2)
     end
     
     sys_model=Init_AT_System(type,Tnum);
-    save("Data\"+Project_title+".mat",'TestTime','kD2_list','kD1','V_eff','kD2_eff_list','pA','sys_model','Tnum','type','ProbS')
+    save("Data\"+Project_title+".mat",'TestTime','kD2_list','kD1','R_eff','V_eff','kD2_eff_list','pA','sys_model','Tnum','type','ProbS')
     disp("MCMC done : Tnum / "+int2str(Tnum))
 end
 %%
