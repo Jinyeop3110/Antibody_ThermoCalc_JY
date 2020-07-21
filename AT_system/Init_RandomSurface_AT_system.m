@@ -25,7 +25,7 @@ if(type=="randomUniformFlat2D")
     
     disp(sys.T_position)
     sys.W_relation=[];
-    sys.T2W=cell(1,sys.Tnum);
+    sys.T2W=zeros(sys.Tnum,1);
 
     wi=0;
     
