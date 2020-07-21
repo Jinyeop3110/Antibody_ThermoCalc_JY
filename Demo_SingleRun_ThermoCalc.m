@@ -29,12 +29,15 @@ pA=10^-9; % antibody concentration
 % To change
 type="square2D"; % Choose among "linear1D", "circle1D", "square2D", "traingularSphere2D" ,"cubicSphere2D"
 
+%% To change
+WperT = 2; % Number of tethers per an antigen. i.e, how many tethers are linked to an antigen?
+
 % To change
 Tnum=98; % number of antigen number. If Tnum is not allowed by the chosen "type", Tnum is set to nearest allowed value. 
 
 %% Run MCMC
 
-sys = Init_AT_System(type,Tnum); % Initiate AT system
+sys = Init_AT_System(type,Tnum, WperT); % Initiate AT system
 Visualize(sys) % Visualization
 title("0 th step")
 
