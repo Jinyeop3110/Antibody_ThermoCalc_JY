@@ -1,4 +1,4 @@
-function sys = Init_AT_System(type,Num)
+function sys = Init_AT_System(type,Num,WperT)
 %INITSPINS Initialize a configuration of spins.
 %   spin = INITSPINS(numSpinsPerDim, p) returns a configuration of spins
 %   with |numSpinsPerDim| spins along each dimension and a proportion |p|
@@ -11,6 +11,7 @@ sys=AT_System;
 if(type=="linear1D")
     p=0.5;
     sys.type="linear1D";
+    sys.WperT=WperT;
     sys.Tnum=Num;
     sys.T=(rand(1,sys.Tnum)>p);
     sys.T_position=struct;
@@ -36,6 +37,7 @@ end
 if(type=="circular1D")
     p=0.5;
     sys.type="circular1D";
+    sys.WperT=WperT;    
     sys.Tnum=Num;
     sys.T=(rand(1,sys.Tnum)>p);
     sys.T_position=struct;
@@ -63,6 +65,7 @@ if(type=="square2D")
     p=0.5;
     sys.type="square2D";
     Num=round(Num^0.5);
+    sys.WperT=WperT;
     sys.Tnum=Num*Num;
     sys.T=(rand(1,sys.Tnum)>p);
     sys.T_position=struct;
@@ -89,6 +92,7 @@ end
 if(type=="triangularSphere2D")
     p=0.5;
     sys.type="triangularSphere2D";
+    sys.WperT=WperT;
     sys.Tnum=Num;
     sys.T=(rand(1,sys.Tnum)>p);
     sys.T_position=struct;
@@ -117,6 +121,7 @@ end
 if(type=="cubicSphere2D")
     p=0.5;
     sys.type="cubicSphere2D";
+    sys.WperT=WperT;
     fv=QuadCubeMesh;
     while size(fv.vertices,1)<Num
         fv=SubdivideSphericalMesh(fv,1);
