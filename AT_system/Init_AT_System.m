@@ -19,15 +19,13 @@ if(type=="linear1D")
     sys.T_position.y=zeros(1,sys.Tnum);
     sys.T_position.z=zeros(1,sys.Tnum);
     sys.W_relation=[];
-    sys.T2W=cell(1,sys.Tnum);
+    sys.T2W=zeros(1,sys.Tnum);
     wi=0;
     for i=1:sys.Tnum
         for j=(i+1):sys.Tnum
             if(DistanceBtwTwoTargets(sys,i,j)<1.5)
                 wi=wi+1;
                 sys.W_relation = [sys.W_relation ; [i,j]];
-                sys.T2W{i}=[sys.T2W{i}, wi];
-                sys.T2W{j}=[sys.T2W{j}, wi];
             end
         end
     end
@@ -45,15 +43,13 @@ if(type=="circular1D")
     sys.T_position.y=sys.Tnum/2/pi*sin(linspace(0,2*pi,sys.Tnum));
     sys.T_position.z=zeros(1,sys.Tnum);
     sys.W_relation=[];
-    sys.T2W=cell(1,sys.Tnum);
+    sys.T2W=zeros(1,sys.Tnum);
     wi=0;
     for i=1:sys.Tnum
         for j=(i+1):sys.Tnum
             if(DistanceBtwTwoTargets(sys,i,j)<1.2)
                 wi=wi+1;
                 sys.W_relation = [sys.W_relation ; [i,j]];
-                sys.T2W{i}=[sys.T2W{i}, wi];
-                sys.T2W{j}=[sys.T2W{j}, wi];
             end
         end
     end
@@ -74,15 +70,13 @@ if(type=="square2D")
     sys.T_position.y=Y(:);
     sys.T_position.z=zeros(1,sys.Tnum);
     sys.W_relation=[];
-    sys.T2W=cell(1,sys.Tnum);
+    sys.T2W=zeros(1,sys.Tnum);
     wi=0;
     for i=1:sys.Tnum
         for j=(i+1):sys.Tnum
             if(DistanceBtwTwoTargets(sys,i,j)<1.2)
                 wi=wi+1;
                 sys.W_relation = [sys.W_relation ; [i,j]];
-                sys.T2W{i}=[sys.T2W{i}, wi];
-                sys.T2W{j}=[sys.T2W{j}, wi];
             end
         end
     end
@@ -103,15 +97,13 @@ if(type=="triangularSphere2D")
     sys.T_position.y=V(:,2)';
     sys.T_position.z=V(:,3)';
     sys.W_relation=[];
-    sys.T2W=cell(1,sys.Tnum);
+    sys.T2W=zeros(1,sys.Tnum);
     wi=0;
     for i=1:sys.Tnum
         for j=(i+1):sys.Tnum
             if(DistanceBtwTwoTargets(sys,i,j)<1.3)
                 wi=wi+1;
                 sys.W_relation = [sys.W_relation ; [i,j]];
-                sys.T2W{i}=[sys.T2W{i}, wi];
-                sys.T2W{j}=[sys.T2W{j}, wi];
             end
         end
     end
@@ -137,15 +129,13 @@ if(type=="cubicSphere2D")
     sys.T_position.y=V(:,2)';
     sys.T_position.z=V(:,3)';
     sys.W_relation=[];
-    sys.T2W=cell(1,sys.Tnum);
+    sys.T2W=zeros(1,sys.Tnum);
     wi=0;
     for i=1:sys.Tnum
         for j=(i+1):sys.Tnum
             if(DistanceBtwTwoTargets(sys,i,j)<1.1)
                 wi=wi+1;
                 sys.W_relation = [sys.W_relation ; [i,j]];
-                sys.T2W{i}=[sys.T2W{i}, wi];
-                sys.T2W{j}=[sys.T2W{j}, wi];
             end
         end
     end
