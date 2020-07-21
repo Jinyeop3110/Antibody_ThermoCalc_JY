@@ -31,6 +31,7 @@ type="randomUniformFlat2D"; % Choose among randomUniformFlat2D randomUniformSphe
 % To change
 L=100; % total area of the surface
 density = 1.0; % density of antigen on the surface
+% So, the total number of antigen (Tnum) becomes L*density
 
 % To change
 disp("Parameter setting done")
@@ -41,17 +42,6 @@ Project_title = "MMDD_square2D_Tnum98_demo";
 IsSave=0; % set 1 to save data, 0 fotherwise
 ProbS=zeros(size(Kd2_list,2),TestTime);
 %% to delete
-
-type="randomQuasiFlat2D"; % Choose among randomUniformFlat2D randomUniformSphere2D randomQuasiFlat2D randomQuasiSphere2D
-density=0.75
-sys_model=Init_RandomSurface_AT_system(type,L,density);
-sys_model.T=(sys_model.T>=0)
-sys_model.W=(sys_model.W>=0)
-sys_model.Visualize()
-%% Run MCMC
-if ~isfolder("Data\"+Project_title+"_")
-    mkdir("Data\"+Project_title+"_")
-end
 
 parfor i=1:size(Kd2_list,2)
     ProbS(i,:)=par_Metropolis_withW(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 10)
