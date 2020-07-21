@@ -8,7 +8,7 @@ figure()
 k=1
 data1name="cubicSphere2D"
 %datapath="Data\0706_cubicSphere2D_Tnum98_compactKd2.mat" 
-datapath="Data\0720_squareSphere2D_Tnum98_AfterCorrection.mat"
+datapath="Data\0720_squareSphere2D_Tnum98_Cr100_AfterCorrection.mat"
 load(datapath)
 semilogx(Kd2_list(2:size(Kd2_list,2))/k,mean(ProbS(2:size(Kd2_list,2),:),2)/sys_model.Tnum,'-o','Color',cmap(1,:),'MarkerEdgeColor',cmap(1,:))
 hold on
@@ -45,7 +45,7 @@ end
 figure()
 yyaxis left
 data1name="cubicSphere2D"
-datapath="Data\0720_squareSphere2D_Tnum98_AfterCorrection.mat"
+datapath="Data\0720_squareSphere2D_Tnum98_Cr1000_AfterCorrection.mat"
 load(datapath)
 loglog(Kd2_list(2:size(Kd2_list,2)),pA*(1-mean(ProbS(2:size(Kd2_list,2),:),2)/sys_model.Tnum)./(mean(ProbS(2:size(Kd2_list,2),:),2)/sys_model.Tnum),'-o','Color',cmap(1,:),'MarkerEdgeColor',cmap(1,:))
 hold on

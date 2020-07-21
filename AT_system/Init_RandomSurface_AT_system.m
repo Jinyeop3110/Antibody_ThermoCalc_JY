@@ -4,11 +4,7 @@ function sys = Init_RandomSurface_AT_System(type, L, density, WperT)
 
 %   Copyright 2020 Jinyeop Song.
 
-
-
 sys=AT_System;
-
-
 
 %% randomUniformFlat2D
 if(type=="randomUniformFlat2D")
