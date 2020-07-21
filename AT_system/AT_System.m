@@ -7,6 +7,7 @@ classdef AT_System
       T_position
       W_relation
       T2W
+      WperT
    end
    methods
        function r = CalculateBindingNum(sys)
