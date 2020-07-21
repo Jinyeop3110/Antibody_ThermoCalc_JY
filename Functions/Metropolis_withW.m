@@ -1,11 +1,11 @@
-function sys = Metropolis_withW(sys, kD1, kD2, kD2_eff, pA)
+function sys = Metropolis_withW(sys, Kd1, Kd2, Kd2_eff, pA)
 numIters = 2^10 * numel(sys.Tnum);
 
 p_iter2=2*ceil(size(sys.W_relation,1)/sys.Tnum);
-p1=min(pA/kD1,1);
-p2=min(kD1/pA,1);
-p3=min(1/kD2_eff,1);
-p4=min(kD2_eff,1);
+p1=min(pA/Kd1,1);
+p2=min(Kd1/pA,1);
+p3=min(1/Kd2_eff,1);
+p4=min(Kd2_eff,1);
 for iter1 = 1 : numIters
     % Pick a random target
     Ind = randi(sys.Tnum);

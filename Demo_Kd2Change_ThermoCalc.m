@@ -13,14 +13,16 @@ addpath(genpath('D:\JY_matlab\Antibody_ThermoCalc_JY')) % Add the entire path of
 Kd1=20*10^-9; % antibody - target Kd
 
 % To change
-Kd2_list=1.1040*10^(-4)*[0, exp(log(10)*linspace(-2.0,2.0,15))] % 20*10^-6 * [0, exp(log(10)*linspace(-1,2,31))]; % weak-binding linker Kd List. Usually recommend to set exponentially-linear spaced values.
-
+Kd2_list=1.1040*10^(-4)*[0, exp(log(10)*linspace(-4.0,4.0,15))] % 20*10^-6 * [0, exp(log(10)*linspace(-1,2,31))]; % weak-binding linker Kd List. Usually recommend to set exponentially-linear spaced values.
 N_avogadro=6.02*10^23;0
 
 % To change
 r_eff = 5.0 % effective radius of weak-binding linker radius, in (nm)
 
-V_eff=4/3*pi*(r_eff*10^-9)^3*1000; % effective volume in (L)
+% To change
+Cr= 10^2; % Correction ratio, reccommemnd Cr=10^2 to 10^4
+
+V_eff=4/3*pi*(r_eff*10^-9)^3*1000*Cr; % effective volume in (L)
 Kd2_eff_list=Kd2_list*N_avogadro*V_eff; % effective Kd2 list
 
 % To change
@@ -28,6 +30,13 @@ pA=10^-9; % antibody concentration
 
 % To change
 type="square2D"; % Choose among "linear1D", "circle1D", "square2D", "traingularSphere2D" ,"cubicSphere2D"
+
+% To change 
+WperT=2; % number of Weak-binding tether per an antigen
+
+% To change 
+isSC=0; % set 1 for considering self-cohesion, 0 for not considering
+
 
 % To change
 Tnum=64; % number of antigen number. If Tnum is not allowed by the chosen "type", Tnum is set to nearest allowed value. 
@@ -47,10 +56,10 @@ if ~isfolder("Data\"+Project_title+"_")
 end
 
 parfor i=1:size(Kd2_list,2)
-    ProbS(i,:)=par_Metropolis_withW(Project_title,type,Tnum,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 10)
+    ProbS(i,:)=par_Metropolis(Project_title,type,Tnum,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 10, WperT, isSC)
 end
 
-sys_model=Init_AT_System(type,Tnum);
+sys_model=Init_AT_System(type,Tnum,WperT);
 
 if IsSave
     save("Data\"+Project_title+".mat",'TestTime','Kd2_list','Kd1','V_eff','Kd2_eff_list','pA','sys_model','Tnum','type','ProbS')

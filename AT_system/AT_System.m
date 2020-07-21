@@ -27,6 +27,7 @@ classdef AT_System
            p=0.5;
            sys.T=(rand(1,sys.Tnum)>p);
            sys.W=zeros(size(sys.W));
+           sys.WperT=zeros(size(sys.WperT));
        end
        
        function r= Visualize(sys)

@@ -47,9 +47,9 @@ if(type=="randomUniformSphere2D")
     sys.T_position=struct;
     
     
-    theta=acos(1-2*rand(sys.Tnum,1))
-    phi=2*3.141592*rand(sys.Tnum,1)
-    radius=(L/4/3.141592)^0.5
+    theta=acos(1-2*rand(sys.Tnum,1));
+    phi=2*3.141592*rand(sys.Tnum,1);
+    radius=(L/4/3.141592)^0.5;
     sys.T_position.x=radius*sin(theta).*cos(phi);
     sys.T_position.y=radius*sin(theta).*sin(phi);
     sys.T_position.z=radius*cos(theta);
@@ -80,8 +80,8 @@ if(type=="randomQuasiFlat2D")
     sys.T=(rand(1,sys.Tnum)>p);
     sys.T_position=struct;
     
-    p = haltonset(2,'Skip',1e3,'Leap',1e2)
-    p = scramble(p,'RR2')
+    p = haltonset(2,'Skip',1e3,'Leap',1e2);
+    p = scramble(p,'RR2');
     X0 = net(p,sys.Tnum);
 
     sys.T_position.x=(L^0.5)*X0(:,1);
@@ -114,15 +114,15 @@ if(type=="randomQuasiSphere2D")
     sys.T_position=struct;
     
     
-    p = haltonset(2,'Skip',1e3,'Leap',1e2)
-    p = scramble(p,'RR2')
+    p = haltonset(2,'Skip',1e3,'Leap',1e2);
+    p = scramble(p,'RR2');
     X0 = net(p,sys.Tnum);
 
     sys.T_position.x=(L^0.5)*X0(:,1);
     
-    theta=acos(1-2*X0(:,1))
-    phi=2*3.141592*X0(:,2)
-    radius=(L/4/3.141592)^0.5
+    theta=acos(1-2*X0(:,1));
+    phi=2*3.141592*X0(:,2);
+    radius=(L/4/3.141592)^0.5;
     sys.T_position.x=radius*sin(theta).*cos(phi);
     sys.T_position.y=radius*sin(theta).*sin(phi);
     sys.T_position.z=radius*cos(theta);
