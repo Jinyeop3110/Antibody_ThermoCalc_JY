@@ -25,8 +25,8 @@ if(type=="randomUniformFlat2D")
     
     disp(sys.T_position)
     sys.W_relation=[];
-    sys.WperT=WperT;
     sys.T2W=cell(1,sys.Tnum);
+
     wi=0;
     
     
@@ -35,8 +35,6 @@ if(type=="randomUniformFlat2D")
             if(DistanceBtwTwoTargets(sys,i,j)<1.01)
                 wi=wi+1;
                 sys.W_relation = [sys.W_relation ; [i,j]];
-                sys.T2W{i}=[sys.T2W{i}, wi];
-                sys.T2W{j}=[sys.T2W{j}, wi];
             end
         end
     end
@@ -61,7 +59,7 @@ if(type=="randomUniformSphere2D")
     sys.T_position.z=radius*cos(theta);
     
     sys.W_relation=[];
-    sys.T2W=cell(1,sys.Tnum);
+    sys.T2W=zeros(sys.Tnum,1);
     wi=0;
     
     
@@ -70,8 +68,6 @@ if(type=="randomUniformSphere2D")
             if(DistanceBtwTwoTargets(sys,i,j)<1.01)
                 wi=wi+1;
                 sys.W_relation = [sys.W_relation ; [i,j]];
-                sys.T2W{i}=[sys.T2W{i}, wi];
-                sys.T2W{j}=[sys.T2W{j}, wi];
             end
         end
     end
@@ -97,7 +93,7 @@ if(type=="randomQuasiFlat2D")
     sys.T_position.z=zeros(sys.Tnum,1);
     
     sys.W_relation=[];
-    sys.T2W=cell(1,sys.Tnum);
+    sys.T2W=zeros(sys.Tnum,1);
     wi=0;
     
     
@@ -106,8 +102,6 @@ if(type=="randomQuasiFlat2D")
             if(DistanceBtwTwoTargets(sys,i,j)<1.01)
                 wi=wi+1;
                 sys.W_relation = [sys.W_relation ; [i,j]];
-                sys.T2W{i}=[sys.T2W{i}, wi];
-                sys.T2W{j}=[sys.T2W{j}, wi];
             end
         end
     end
@@ -138,7 +132,7 @@ if(type=="randomQuasiSphere2D")
     sys.T_position.z=radius*cos(theta);
     
     sys.W_relation=[];
-    sys.T2W=cell(1,sys.Tnum);
+    sys.T2W=zeros(sys.Tnum,1);
     wi=0;
     
     
@@ -147,8 +141,6 @@ if(type=="randomQuasiSphere2D")
             if(DistanceBtwTwoTargets(sys,i,j)<1.01)
                 wi=wi+1;
                 sys.W_relation = [sys.W_relation ; [i,j]];
-                sys.T2W{i}=[sys.T2W{i}, wi];
-                sys.T2W{j}=[sys.T2W{j}, wi];
             end
         end
     end
