@@ -1,4 +1,4 @@
-function sys = Init_RandomSurface_AT_System(type, L, density)
+function sys = Init_RandomSurface_AT_System(type, L, density, WperT)
 
 % RandomSurface AT system initiation , Jul-20-2020
 
@@ -14,6 +14,7 @@ sys=AT_System;
 if(type=="randomUniformFlat2D")
     p=0.5;
     sys.type="randomUniformFlat2D";
+    sys.WperT=WperT;
     sys.Tnum=floor((L)*density);
     sys.T=(rand(1,sys.Tnum)>p);
     sys.T_position=struct;
@@ -24,7 +25,8 @@ if(type=="randomUniformFlat2D")
     
     disp(sys.T_position)
     sys.W_relation=[];
-    sys.T2W=zeros(sys.Tnum,1);
+    sys.T2W=cell(1,sys.Tnum);
+
     wi=0;
     
     
@@ -43,6 +45,7 @@ end
 if(type=="randomUniformSphere2D")
     p=0.5;
     sys.type="randomUniformSphere2D";
+    sys.WperT=WperT;
     sys.Tnum=floor((L)*density);
     sys.T=(rand(1,sys.Tnum)>p);
     sys.T_position=struct;
@@ -75,7 +78,8 @@ end
 %% randomQuasiFlat2D
 if(type=="randomQuasiFlat2D")
     p=0.5;
-    sys.type="randomQuasiFlat2D";
+    sys.type="randomQuasiFlat2D";    
+    sys.WperT=WperT;
     sys.Tnum=floor((L)*density);
     sys.T=(rand(1,sys.Tnum)>p);
     sys.T_position=struct;
@@ -108,6 +112,7 @@ end
 if(type=="randomQuasiSphere2D")
     p=0.5;
     sys.type="randomQuasiSphere2D";
+    sys.WperT=WperT;
     sys.Tnum=floor((L)*density);
     sys.T=(rand(1,sys.Tnum)>p);
     sys.T_position=struct;
