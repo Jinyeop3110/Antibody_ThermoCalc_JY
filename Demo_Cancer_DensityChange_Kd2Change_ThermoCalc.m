@@ -39,8 +39,8 @@ isSC=0; % set 1 for considering self-cohesion, 0 for not considering
 
 % To change
 L=100; % total area of the surface
-density = 1.5; % density of antigen on the surface
-Tnum=floor(L*density);
+density_List = [0.75 1.5 3.0] ; % list density of antigen on the surface
+Tnum_List=floor(L*density_List);
 
 % So, the total number of antigen (Tnum) becomes L*density
 
@@ -48,21 +48,32 @@ Tnum=floor(L*density);
 disp("Parameter setting done")
 
 %% Setting MCMC step Parameters
-TestTime=1*2^10;
-Project_title = "MMDD_square2D_Tnum98_demo";
+TestTime=5*2^10;
+Project_title = "DensityChange_demo_";
 IsSave=1; % set 1 to save data, 0 fotherwise
-ProbS=zeros(size(Kd2_list,2),TestTime);
+ProbS=zeros(size(density_List,2), size(Kd2_list,2), TestTime);
 cmap=0.8*hsv(10);
 cmap(1,:)=[0.75 0.1 0.1];
+
 %% MCMC
 
-parfor i=1:size(Kd2_list,2)
-    ProbS(i,:)=par_Metropolis_RS(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 1, WperT, isSC)
+if ~isfolder("Data\"+Project_title+"_")
+    mkdir("Data\"+Project_title+"_")
+end
+
+for j=1:size(density_List,2)
+    density=density_List(j);
+    Tnum=Tnum_List(j);
+    parfor i=1:size(Kd2_list,2)
+        ProbS(j, i,:)=par_Metropolis_RS(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 50, WperT, isSC)
+    end
+    
+
 end
 sys_model= Init_AT_System_RS(type,L,density, WperT);
 
 if IsSave
-    save("Data\"+Project_title+".mat",'TestTime','Kd2_list','Kd1','V_eff','Kd2_eff_list','pA','sys_model','Tnum','type','ProbS', 'WperT', 'Cr', 'isSC')
+    save("Data\"+Project_title+".mat",'TestTime','Kd2_list','density_List','Kd1','V_eff','Kd2_eff_list','pA','Tnum_List','type','ProbS', 'WperT', 'Cr', 'isSC')
 end
 
 disp("MCMC done")
@@ -70,17 +81,13 @@ disp("MCMC done")
 
 %% Drawing with Cohesion
 % bounding %
+
+
 figure();
-yyaxis left
-data1name="randomUniformSphere2D" % Change dataname
-% if you wanna choose different values,
-semilogx(Kd2_list(2:size(Kd2_list,2)),mean(ProbS(2:size(Kd2_list,2),:),2)/Tnum,'-o','Color',cmap(2,:),'MarkerEdgeColor',cmap(2,:));ylabel("log(Kd_eff)");
-axis([min(Kd2_list(2:size(Kd2_list,2))) max(Kd2_list(2:size(Kd2_list,2))) 0 1])
-ylabel("Antigen Binding %")
-set(gca,'ycolor','black') 
+k=1;
+Legend=[];
 
 
-data2name="SelfCohesion";
 data2=[];
 for i=2:size(Kd2_list,2)
     data2=[data2 Cohesion(Kd2_list(i),pA,WperT)];
@@ -92,6 +99,24 @@ ylabel("Self Cohesion %")
 set(gca,'ycolor',cmap(1,:)) 
 
 
+for j=1:size(density_List,2)
+    k=k+1;
+    density=density_List(j);
+    Tnum=Tnum_List(j);
+    yyaxis left
+    dataname="Density : " +num2str(density)% Change dataname
+    Legend=[Legend dataname];
+    % if you wanna choose different values,
+    semilogx(Kd2_list(2:size(Kd2_list,2)),mean(ProbS(j, 2:size(Kd2_list,2),:),3)/Tnum,'-o','Color',cmap(k,:),'MarkerEdgeColor',cmap(k,:));ylabel("log(Kd_eff)");
+    
+end
+axis([min(Kd2_list(2:size(Kd2_list,2))) max(Kd2_list(2:size(Kd2_list,2))) 0 1])
+set(gca,'ycolor','black')
+ylabel("Antigen Binding %")
+
+
+
+
 yyaxis left
 data3name="Control"
 semilogx([0.5*min(Kd2_list(2:size(Kd2_list,2))),2*max(Kd2_list(2:size(Kd2_list,2)))],[pA/Kd1, pA/Kd1],'Color','blue','LineStyle','--')
@@ -99,7 +124,7 @@ hold on
 title("Kd_2 vs Antigen Binding %")
 xlabel("log(Kd2)")
 
-legend([data1name data3name data2name])
+legend([ Legend "Control" "Self Cohesion" ], 'Location','northeast')
 
 a=[sprintf('%s', datestr(now,'mm-dd-yyyy HH-MM_')) int2str(randi(500))];
 if IsSave
@@ -108,24 +133,36 @@ saveas(gcf,"Figure\fig_withCohesion_"+a+".png")
 end
 
 
-
+%%
 figure();
-yyaxis left
-data1name="randomUniformSphere2D" % Change dataname
-loglog(Kd2_list(2:size(Kd2_list,2)),pA*(1-mean(ProbS(2:size(Kd2_list,2),:),2)/Tnum)./(mean(ProbS(2:size(Kd2_list,2),:),2)/Tnum),'-o','Color',cmap(2,:),'MarkerEdgeColor',cmap(2,:));hold on;
-ylabel("log(Kd_eff)");
-set(gca,'ycolor','black') 
+k=1;
+Legend=[];
 
-
-data2name="SelfCohesion";
 data2=[];
 for i=2:size(Kd2_list,2)
     data2=[data2 Cohesion(Kd2_list(i),pA,WperT)];
 end
 yyaxis right
-semilogx(Kd2_list(2:size(Kd2_list,2)),data2,'-o','Color',cmap(1,:),'MarkerEdgeColor',cmap(1,:))
-ylabel("SelfCohesion %")
-set(gca,'ycolor',cmap(1,:)) 
+semilogx(Kd2_list(2:size(Kd2_list,2)),data2,'-d','Color',cmap(k,:),'MarkerEdgeColor',cmap(k,:))
+hold on
+ylabel("Self Cohesion %")
+set(gca,'ycolor',cmap(k,:)) 
+
+
+for j=1:size(density_List,2)
+    k=k+1;
+    density=density_List(j);
+    Tnum=Tnum_List(j);
+    yyaxis left
+    dataname="Density : " +num2str(density)% Change dataname
+    Legend=[Legend dataname];
+    % if you wanna choose different values,
+    loglog(Kd2_list(2:size(Kd2_list,2)),pA*(1-mean(ProbS(j, 2:size(Kd2_list,2),:),3)/Tnum)./(mean(ProbS(j, 2:size(Kd2_list,2),:),3)/Tnum),'-o','Color',cmap(k,:),'MarkerEdgeColor',cmap(k,:));hold on;
+    
+end
+axis([min(Kd2_list(2:size(Kd2_list,2))) max(Kd2_list(2:size(Kd2_list,2))) 10^(-5)*Kd1 2*Kd1])
+set(gca,'ycolor','black')
+ylabel("log(Kd_eff)")
 
 
 
@@ -133,19 +170,17 @@ set(gca,'ycolor',cmap(1,:))
 yyaxis left
 data3name="Control"
 semilogx([0.5*min(Kd2_list(2:size(Kd2_list,2))),2*max(Kd2_list(2:size(Kd2_list,2)))],[Kd1, Kd1],'Color','blue','LineStyle','--')
-
+hold on
 title("Kd_2 vs Kd_eff")
 xlabel("log(Kd2)")
 
-
-
-legend([data1name data3name data2name])
-axis([min(Kd2_list(2:size(Kd2_list,2))) max(Kd2_list(2:size(Kd2_list,2))) 10^(-5)*Kd1 2*Kd1])
+legend([ Legend "Control" "Self Cohesion" ], 'Location','northeast')
 
 a=[sprintf('%s', datestr(now,'mm-dd-yyyy HH-MM_')) int2str(randi(500))];
-
 if IsSave
 saveas(gcf,"Figure\fig_withCohesion_"+a+".fig")
 saveas(gcf,"Figure\fig_withCohesion_"+a+".png")
 end
+
+
 

@@ -11,8 +11,6 @@ end
 
 %disp("start simulation for kD2="+ string(kD2))
 
-sys = Init_AT_System_RS(type,L,density, WperT);
-
 for t=1:TestTime
     
     if rem(t,2^10)==0   
