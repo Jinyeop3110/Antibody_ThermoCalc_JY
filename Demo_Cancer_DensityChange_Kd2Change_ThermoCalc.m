@@ -65,7 +65,7 @@ for j=1:size(density_List,2)
     density=density_List(j);
     Tnum=Tnum_List(j);
     parfor i=1:size(Kd2_list,2)
-        ProbS(j, i,:)=par_Metropolis_RS(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 50, WperT, isSC)
+        ProbS(j, i,:)=par_Metropolis_RS(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 100, WperT, isSC)
     end
     
 

@@ -48,7 +48,7 @@ Tnum=floor(L*density);
 disp("Parameter setting done")
 
 %% Setting MCMC step Parameters
-TestTime=1*2^10;
+TestTime=5*2^10;
 Project_title = "MMDD_square2D_Tnum98_demo";
 IsSave=1; % set 1 to save data, 0 fotherwise
 ProbS=zeros(size(Kd2_list,2),TestTime);
@@ -57,7 +57,7 @@ cmap(1,:)=[0.75 0.1 0.1];
 %% MCMC
 
 parfor i=1:size(Kd2_list,2)
-    ProbS(i,:)=par_Metropolis_RS(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 1, WperT, isSC)
+    ProbS(i,:)=par_Metropolis_RS(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 100, WperT, isSC)
 end
 sys_model= Init_AT_System_RS(type,L,density, WperT);
 
