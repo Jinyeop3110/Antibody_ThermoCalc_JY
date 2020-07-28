@@ -170,6 +170,7 @@ hold on
 
 yyaxis left
 axis([0.5*min(Kd2_list(2:size(Kd2_list,2))) 2*max(Kd2_list(2:size(Kd2_list,2))) 10^(-4)*Kd1 1.5*Kd1])
+set(gca,'Yscale','log')
 set(gca,'ycolor','black')
 ylabel("log(Kd_eff)")
 title("Kd_2 vs Kd_eff")
