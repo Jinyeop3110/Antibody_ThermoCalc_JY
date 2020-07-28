@@ -39,10 +39,11 @@ classdef AT_System
            wlist=find(sys.W==1);
            if ~isempty(wlist)
                for i=1:size(wlist,2)
-               if rand()<destroy_ratio
-                    sys.W(Ind)=0;
-                    sys.T2W(sys.W_relation(Ind,1))=sys.T2W(sys.W_relation(Ind,1))-1;
-                    sys.T2W(sys.W_relation(Ind,2))=sys.T2W(sys.W_relation(Ind,2))-1;
+                  if rand()<destroy_ratio
+                       sys.W(Ind)=0;
+                       sys.T2W(sys.W_relation(Ind,1))=sys.T2W(sys.W_relation(Ind,1))-1;
+                       sys.T2W(sys.W_relation(Ind,2))=sys.T2W(sys.W_relation(Ind,2))-1;
+                  end
                end
            end
        end
