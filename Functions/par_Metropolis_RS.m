@@ -1,7 +1,7 @@
 function ProbS_column = par_Metropolis_RS(Project_title,type,L,density,Kd1,Kd2,Kd2_eff,pA,TestTime, MCMC_num, WperT, isSC)
 
 destroy_ratio=0.5;
-destroy_repnum=10;
+destroy_repnum=20;
 
 ProbS_column=zeros(1,TestTime);
 
