@@ -26,7 +26,7 @@ for t=1:TestTime
         sys = Metropolis_withW(sys,Kd1,Kd2,Kd2_eff,pA);
         
         if j<destroy_repnum
-            sys = Destroy(sys,destroy_ratio)
+            sys = Destroy(sys,destroy_ratio);
         end
     end
     
