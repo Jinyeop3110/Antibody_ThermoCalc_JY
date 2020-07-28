@@ -132,7 +132,7 @@ set(gca,'ycolor',cmap(1,:))
 
 yyaxis left
 data3name="Control"
-semilogx([0.5*min(Kd2_list(2:size(Kd2_list,2))),2*max(Kd2_list(2:size(Kd2_list,2)))],[Kd1, Kd1],'Color','blue','LineStyle','--')
+loglog([0.5*min(Kd2_list(2:size(Kd2_list,2))),2*max(Kd2_list(2:size(Kd2_list,2)))],[Kd1, Kd1],'Color','blue','LineStyle','--')
 
 title("Kd_2 vs Kd_eff")
 xlabel("log(Kd2)")
