@@ -30,7 +30,7 @@ classdef AT_System
            sys.WperT=zeros(size(sys.WperT));
        end
        
-       function sys = Destory(sys,destroy_ratio)
+       function sys = Destroy(sys,destroy_ratio)
            p=0.5;
            sys.T=(rand(1,sys.Tnum)>p);
            sys.W=zeros(size(sys.W));
