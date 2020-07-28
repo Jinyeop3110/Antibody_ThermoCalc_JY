@@ -1,7 +1,5 @@
 function ProbS_column = par_Metropolis_RS(Project_title,type,L,density,Kd1,Kd2,Kd2_eff,pA,TestTime, MCMC_num, WperT, isSC)
 
-destroy_ratio=0.5;
-destroy_repnum=20;
 
 ProbS_column=zeros(1,TestTime);
 
@@ -25,9 +23,6 @@ for t=1:TestTime
         
         sys = Metropolis_withW(sys,Kd1,Kd2,Kd2_eff,pA);
         
-        if j<destroy_repnum
-            sys = Destroy(sys,destroy_ratio);
-        end
     end
     
     ProbS_column(1,t)=CalculateBindingNum(sys);

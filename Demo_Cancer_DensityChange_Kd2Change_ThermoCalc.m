@@ -13,7 +13,9 @@ addpath(genpath('D:\JY_matlab\New_Antibody_ThermoCalc_JY')) % Add the entire pat
 Kd1=10*10^-9; % antibody - target Kd
 
 % To change
+
 Kd2_list=1.1040*10^(-4)*[0, exp(log(10)*linspace(-3.0,4.0,69))] % 20*10^-6 * [0, exp(log(10)*linspace(-1,2,31))]; % weak-binding linker Kd List. Usually recommend to set exponentially-linear spaced values.
+
 N_avogadro=6.02*10^23;
 
 % To change
@@ -48,8 +50,10 @@ Tnum_List=floor(L*density_List);
 disp("Parameter setting done")
 
 %% Setting MCMC step Parameters
+
 TestTime=10*2^10;
 Project_title = "DensityChange_demo_rung_log";
+
 IsSave=1; % set 1 to save data, 0 fotherwise
 ProbS=zeros(size(density_List,2), size(Kd2_list,2), TestTime);
 cmap=0.8*hsv(10);
@@ -160,21 +164,20 @@ for j=1:size(density_List,2)
     loglog(Kd2_list(2:size(Kd2_list,2)),pA*(1-mean(ProbS(j, 2:size(Kd2_list,2),:),3)/Tnum)./(mean(ProbS(j, 2:size(Kd2_list,2),:),3)/Tnum),'-o','Color',cmap(k,:),'MarkerEdgeColor',cmap(k,:));hold on;
     
 end
+axis([min(Kd2_list(2:size(Kd2_list,2))) max(Kd2_list(2:size(Kd2_list,2))) 10^(-5)*Kd1 2*Kd1])
+set(gca,'ycolor','black')
+ylabel("log(Kd_eff)")
+
 
 
 
 yyaxis left
 data3name="Control"
-loglog([0.5*min(Kd2_list(2:size(Kd2_list,2))),2*max(Kd2_list(2:size(Kd2_list,2)))],[Kd1, Kd1],'Color','blue','LineStyle','--')
+semilogx([0.5*min(Kd2_list(2:size(Kd2_list,2))),2*max(Kd2_list(2:size(Kd2_list,2)))],[Kd1, Kd1],'Color','blue','LineStyle','--')
 hold on
-
-yyaxis left
-axis([0.5*min(Kd2_list(2:size(Kd2_list,2))) 2*max(Kd2_list(2:size(Kd2_list,2))) 10^(-4)*Kd1 1.5*Kd1])
-set(gca,'Yscale','log')
-set(gca,'ycolor','black')
-ylabel("log(Kd_eff)")
 title("Kd_2 vs Kd_eff")
 xlabel("log(Kd2)")
+
 legend([ Legend "Control" "Self Cohesion" ], 'Location','northeast')
 
 a=[sprintf('%s', datestr(now,'mm-dd-yyyy HH-MM_')) int2str(randi(500))];

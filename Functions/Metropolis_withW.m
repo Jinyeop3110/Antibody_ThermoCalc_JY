@@ -1,7 +1,7 @@
 function sys = Metropolis_withW(sys, Kd1, Kd2, Kd2_eff, pA)
 numIters = 2^10 * numel(sys.Tnum);
 
-p_iter2=ceil(size(sys.W_relation,1)/sys.Tnum);
+p_iter2=2*ceil(size(sys.W_relation,1)/sys.Tnum);
 p1=min(pA/Kd1,1);
 p2=min(Kd1/pA,1);
 p3=min(1/Kd2_eff,1);
