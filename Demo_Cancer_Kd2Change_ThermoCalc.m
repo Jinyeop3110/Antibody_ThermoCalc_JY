@@ -140,7 +140,7 @@ xlabel("log(Kd2)")
 
 
 legend([data1name data3name data2name])
-axis([min(Kd2_list(2:size(Kd2_list,2))) max(Kd2_list(2:size(Kd2_list,2))) 10^(-5)*Kd1 2*Kd1])
+axis([min(Kd2_list(2:size(Kd2_list,2))) max(Kd2_list(2:size(Kd2_list,2))) 10^(-4)*Kd1 2*Kd1])
 
 a=[sprintf('%s', datestr(now,'mm-dd-yyyy HH-MM_')) int2str(randi(500))];
 
