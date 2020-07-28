@@ -7,7 +7,7 @@
 clc; clear;
 
 % To change
-addpath(genpath('D:\JY_matlab\Antibody_ThermoCalc_JY')) % Add the entire path of Antibody_ThermoCalc_JY
+addpath(genpath('D:\JY_matlab\New_Antibody_ThermoCalc_JY')) % Add the entire path of Antibody_ThermoCalc_JY
 
 % To change
 Kd1=10*10^-9; % antibody - target Kd
