@@ -1,4 +1,4 @@
-%%
+    %%
 % Written by Jinyeop Song, 2020/07/20
 % This is the demo code for Antibody_ThermoCalc_JY.
 % To run the code, follow the description of each sections.
@@ -7,20 +7,20 @@
 clc; clear;
 
 % To change
-addpath(genpath('D:\JY_matlab\Antibody_ThermoCalc_JY')) % Add the entire path of Antibody_ThermoCalc_JY
+addpath(genpath('/home/users/jbs/Antibody_thermo_calc/cancer_case_final_v5_log')) % Add the entire path of Antibody_ThermoCalc_JY
 
 % To change
 Kd1=10*10^-9; % antibody - target Kd
 
 % To change
-Kd2_list=1.1040*10^(-7)*[0, exp(log(10)*linspace(-4.0,4.0,15))] % 20*10^-6 * [0, exp(log(10)*linspace(-1,2,31))]; % weak-binding linker Kd List. Usually recommend to set exponentially-linear spaced values.
+Kd2_list=1.1040*10^(-4)*[0, exp(log(10)*linspace(-3.0,4.0,69))] % 20*10^-6 * [0, exp(log(10)*linspace(-1,2,31))]; % weak-binding linker Kd List. Usually recommend to set exponentially-linear spaced values.
 N_avogadro=6.02*10^23;
 
 % To change
 r_eff = 5.0 % effective radius of weak-binding linker radius, in (nm)
 
 % To change
-Cr= 10^2; % Correction ratio, reccommemnd Cr=10^2 to 10^4
+Cr= 1; % Correction ratio, reccommemnd Cr=10^2 to 10^4
 
 V_eff=4/3*pi*(r_eff*10^-9)^3*1000*Cr; % effective volume in (L)
 Kd2_eff_list=Kd2_list*N_avogadro*V_eff; % effective Kd2 list
@@ -29,7 +29,7 @@ Kd2_eff_list=Kd2_list*N_avogadro*V_eff; % effective Kd2 list
 pA=10^-9; % antibody concentration
 
 % To change
-type="randomUniformSphere2D"; % Choose among randomUniformFlat2D randomUniformSphere2D randomQuasiFlat2D randomQuasiSphere2D
+type="randomQuasiSphere2D"; % Choose among randomUniformFlat2D randomUniformSphere2D randomQuasiFlat2D randomQuasiSphere2D
 
 % To change 
 WperT=2; % number of Weak-binding tether per an antigen
@@ -39,7 +39,7 @@ isSC=0; % set 1 for considering self-cohesion, 0 for not considering
 
 % To change
 L=100; % total area of the surface
-density_List = [0.75 1.5 3.0] ; % list density of antigen on the surface
+density_List = [0.5 2.0 5.0] ; % list density of antigen on the surface
 Tnum_List=floor(L*density_List);
 
 % So, the total number of antigen (Tnum) becomes L*density
@@ -48,8 +48,8 @@ Tnum_List=floor(L*density_List);
 disp("Parameter setting done")
 
 %% Setting MCMC step Parameters
-TestTime=5*2^10;
-Project_title = "DensityChange_demo_";
+TestTime=10*2^3;
+Project_title = "DensityChange_demo_rung_log";
 IsSave=1; % set 1 to save data, 0 fotherwise
 ProbS=zeros(size(density_List,2), size(Kd2_list,2), TestTime);
 cmap=0.8*hsv(10);
@@ -65,7 +65,7 @@ for j=1:size(density_List,2)
     density=density_List(j);
     Tnum=Tnum_List(j);
     parfor i=1:size(Kd2_list,2)
-        ProbS(j, i,:)=par_Metropolis_RS(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 100, WperT, isSC)
+        ProbS(j, i,:)=par_Metropolis_RS(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 10, WperT, isSC)
     end
     
 
