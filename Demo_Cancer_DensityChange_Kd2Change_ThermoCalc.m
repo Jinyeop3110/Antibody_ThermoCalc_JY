@@ -48,7 +48,7 @@ Tnum_List=floor(L*density_List);
 disp("Parameter setting done")
 
 %% Setting MCMC step Parameters
-TestTime=5*2^10;
+TestTime=10*2^10;
 Project_title = "DensityChange_demo_";
 IsSave=1; % set 1 to save data, 0 fotherwise
 ProbS=zeros(size(density_List,2), size(Kd2_list,2), TestTime);
