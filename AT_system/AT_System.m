@@ -30,6 +30,23 @@ classdef AT_System
            sys.WperT=zeros(size(sys.WperT));
        end
        
+       function sys = Destory(sys,destroy_ratio)
+           p=0.5;
+           sys.T=(rand(1,sys.Tnum)>p);
+           sys.W=zeros(size(sys.W));
+           sys.WperT=zeros(size(sys.WperT));
+           
+           wlist=find(sys.W==1);
+           if ~isempty(wlist)
+               for i=1:size(wlist,2)
+               if rand()<destroy_ratio
+                    sys.W(Ind)=0;
+                    sys.T2W(sys.W_relation(Ind,1))=sys.T2W(sys.W_relation(Ind,1))-1;
+                    sys.T2W(sys.W_relation(Ind,2))=sys.T2W(sys.W_relation(Ind,2))-1;
+               end
+           end
+       end
+       
        function r= Visualize(sys)
            figure()
            colorindex=(sys.T'*[0,0,1]+(1-sys.T')*[0.7,0.7,0.7]);
