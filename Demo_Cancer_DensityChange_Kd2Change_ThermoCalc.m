@@ -48,7 +48,7 @@ Tnum_List=floor(L*density_List);
 disp("Parameter setting done")
 
 %% Setting MCMC step Parameters
-TestTime=10*2^6;
+TestTime=10*2^10;
 Project_title = "DensityChange_demo_rung_log";
 IsSave=1; % set 1 to save data, 0 fotherwise
 ProbS=zeros(size(density_List,2), size(Kd2_list,2), TestTime);
@@ -171,13 +171,13 @@ loglog([0.5*min(Kd2_list(2:size(Kd2_list,2))),2*max(Kd2_list(2:size(Kd2_list,2))
 hold on
 
 yyaxis left
-axis([0.5*min(Kd2_list(2:size(Kd2_list,2))) 2*max(Kd2_list(2:size(Kd2_list,2))) 10^(-3.5)*Kd1 1.5*Kd1])
+axis([0.5*min(Kd2_list(2:size(Kd2_list,2))) 2*max(Kd2_list(2:size(Kd2_list,2))) 10^(-4.0)*Kd1 1.5*Kd1])
 set(gca,'Yscale','log')
 set(gca,'ycolor','black')
 ylabel("log(Kd_eff)")
 title("Kd_2 vs Kd_eff")
 xlabel("log(Kd2)")
-legend([ Legend "Control" "Self Cohesion" ], 'Location','northeast')
+legend([ Legend "Control" "Self Cohesion" ], 'Location','southeast')
 
 a=[sprintf('%s', datestr(now,'mm-dd-yyyy HH-MM_')) int2str(randi(500))];
 if IsSave

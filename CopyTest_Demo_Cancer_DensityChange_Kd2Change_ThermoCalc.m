@@ -20,7 +20,7 @@ N_avogadro=6.02*10^23;
 r_eff = 5.0; % effective radius of weak-binding linker radius, in (nm)
 
 % To change
-Cr= 1; % Correction ratio, reccommemnd Cr=10^2 to 10^4
+Cr= 10; % Correction ratio, reccommemnd Cr=10^2 to 10^4
 
 V_eff=4/3*pi*(r_eff*10^-9)^3*1000*Cr; % effective volume in (L)
 Kd2_eff_list=Kd2_list*N_avogadro*V_eff; % effective Kd2 list
@@ -32,14 +32,14 @@ pA=10^-9; % antibody concentration
 type="randomQuasiSphere2D"; % Choose among randomUniformFlat2D randomUniformSphere2D randomQuasiFlat2D randomQuasiSphere2D
 
 % To change 
-WperT=2; % number of Weak-binding tether per an antigen
+WperT=3; % number of Weak-binding tether per an antigen
 
 % To change 
 isSC=0; % set 1 for considering self-cohesion, 0 for not considering
 
 % To change
 L=50; % total area of the surface
-density_List = [0.5 2.0] %[0.5 2.0 5.0] ; % list density of antigen on the surface
+density_List = [0.5 2.0 5.0] %[0.5 2.0 5.0] ; % list density of antigen on the surface
 Tnum_List=floor(L*density_List);
 
 % So, the total number of antigen (Tnum) becomes L*density
@@ -65,7 +65,7 @@ for j=1:size(density_List,2)
     density=density_List(j);
     Tnum=Tnum_List(j);
     parfor i=1:size(Kd2_list,2)
-        ProbS(j, i,:)=par_Metropolis_RS(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 2, WperT, isSC)
+        ProbS(j, i,:)=par_Metropolis_RS(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 100, WperT, isSC)
     end
     
 
@@ -171,13 +171,13 @@ loglog([0.5*min(Kd2_list(2:size(Kd2_list,2))),2*max(Kd2_list(2:size(Kd2_list,2))
 hold on
 
 yyaxis left
-axis([0.5*min(Kd2_list(2:size(Kd2_list,2))) 2*max(Kd2_list(2:size(Kd2_list,2))) 10^(-2)*Kd1 1.5*Kd1])
+axis([0.5*min(Kd2_list(2:size(Kd2_list,2))) 2*max(Kd2_list(2:size(Kd2_list,2))) 10^(-4.0)*Kd1 1.5*Kd1])
 set(gca,'Yscale','log')
 set(gca,'ycolor','black')
 ylabel("log(Kd_eff)")
 title("Kd_2 vs Kd_eff")
 xlabel("log(Kd2)")
-legend([ Legend "Control" "Self Cohesion" ], 'Location','northeast')
+legend([ Legend "Control" "Self Cohesion" ], 'Location','southeast')
 
 a=[sprintf('%s', datestr(now,'mm-dd-yyyy HH-MM_')) int2str(randi(500))];
 if IsSave
