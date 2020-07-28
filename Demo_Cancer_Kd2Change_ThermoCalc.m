@@ -133,6 +133,7 @@ set(gca,'ycolor',cmap(1,:))
 yyaxis left
 data3name="Control"
 loglog([0.5*min(Kd2_list(2:size(Kd2_list,2))),2*max(Kd2_list(2:size(Kd2_list,2)))],[Kd1, Kd1],'Color','blue','LineStyle','--')
+axis([min(Kd2_list(2:size(Kd2_list,2))) max(Kd2_list(2:size(Kd2_list,2))) 10^(-4)*Kd1 2*Kd1])
 
 title("Kd_2 vs Kd_eff")
 xlabel("log(Kd2)")
@@ -140,7 +141,7 @@ xlabel("log(Kd2)")
 
 
 legend([data1name data3name data2name])
-axis([min(Kd2_list(2:size(Kd2_list,2))) max(Kd2_list(2:size(Kd2_list,2))) 10^(-4)*Kd1 2*Kd1])
+
 
 a=[sprintf('%s', datestr(now,'mm-dd-yyyy HH-MM_')) int2str(randi(500))];
 
