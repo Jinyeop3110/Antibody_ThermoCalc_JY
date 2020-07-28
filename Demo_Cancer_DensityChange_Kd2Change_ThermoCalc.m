@@ -13,7 +13,7 @@ addpath(genpath('D:\JY_matlab\Antibody_ThermoCalc_JY')) % Add the entire path of
 Kd1=10*10^-9; % antibody - target Kd
 
 % To change
-Kd2_list=1.1040*10^(-7)*[0, exp(log(10)*linspace(-4.0,4.0,15))] % 20*10^-6 * [0, exp(log(10)*linspace(-1,2,31))]; % weak-binding linker Kd List. Usually recommend to set exponentially-linear spaced values.
+Kd2_list=1.1040*10^(-6)*[0, exp(log(10)*linspace(-4.0,4.0,15))] % 20*10^-6 * [0, exp(log(10)*linspace(-1,2,31))]; % weak-binding linker Kd List. Usually recommend to set exponentially-linear spaced values.
 N_avogadro=6.02*10^23;
 
 % To change
@@ -65,7 +65,7 @@ for j=1:size(density_List,2)
     density=density_List(j);
     Tnum=Tnum_List(j);
     parfor i=1:size(Kd2_list,2)
-        ProbS(j, i,:)=par_Metropolis_RS(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 100, WperT, isSC)
+        ProbS(j, i,:)=par_Metropolis_RS(Project_title,type,L, density,Kd1,Kd2_list(i),Kd2_eff_list(i),pA,TestTime, 50, WperT, isSC)
     end
     
 
@@ -160,10 +160,6 @@ for j=1:size(density_List,2)
     loglog(Kd2_list(2:size(Kd2_list,2)),pA*(1-mean(ProbS(j, 2:size(Kd2_list,2),:),3)/Tnum)./(mean(ProbS(j, 2:size(Kd2_list,2),:),3)/Tnum),'-o','Color',cmap(k,:),'MarkerEdgeColor',cmap(k,:));hold on;
     
 end
-axis([min(Kd2_list(2:size(Kd2_list,2))) max(Kd2_list(2:size(Kd2_list,2))) 10^(-5)*Kd1 2*Kd1])
-set(gca,'ycolor','black')
-ylabel("log(Kd_eff)")
-
 
 
 
@@ -171,9 +167,13 @@ yyaxis left
 data3name="Control"
 semilogx([0.5*min(Kd2_list(2:size(Kd2_list,2))),2*max(Kd2_list(2:size(Kd2_list,2)))],[Kd1, Kd1],'Color','blue','LineStyle','--')
 hold on
+
+yyaxis left
+axis([0.5*min(Kd2_list(2:size(Kd2_list,2))) 2*max(Kd2_list(2:size(Kd2_list,2))) 10^(-4)*Kd1 1.5*Kd1])
+set(gca,'ycolor','black')
+ylabel("log(Kd_eff)")
 title("Kd_2 vs Kd_eff")
 xlabel("log(Kd2)")
-
 legend([ Legend "Control" "Self Cohesion" ], 'Location','northeast')
 
 a=[sprintf('%s', datestr(now,'mm-dd-yyyy HH-MM_')) int2str(randi(500))];
