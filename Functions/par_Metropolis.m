@@ -15,7 +15,7 @@ for t=1:TestTime
     if rem(t,2^10)==0
         %disp("Done simulation for kD2="+ string(kD2_list(i))+" & t="+string(t/2^10)+" th 2^10")
     end
-    sys = Reinitialize(sys);
+    sys = Init_AT_System(type,Tnum, WperT);
     for j=1:MCMC_num
         sys = Metropolis_withW(sys,kD1,kD2,kD2_eff,pA);
     end
